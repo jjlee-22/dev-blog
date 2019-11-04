@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.conf import settings
 
 # Create your models here.
 STATUS = (
@@ -18,6 +19,7 @@ class Post(models.Model):
 	content = models.TextField()
 	created_on = models.DateTimeField(auto_now_add=True)
 	status = models.IntegerField(choices=STATUS, default=0)
+	post_image = models.ImageField(upload_to='img/', default='img/noimage/noimage.jpg', blank=True, null=True)
 
 	class Meta:
 		ordering = ['-created_on']
