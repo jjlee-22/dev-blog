@@ -39,6 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'ckeditor',
+    'ckeditor_uploader',
+    'disqus',
 ]
 
 MIDDLEWARE = [
@@ -119,8 +123,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_URL = '/blog/static/assets/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'blog/static')
+STATIC_URL = '/static/'
 
 # Media files (for storing user's post images)
 MEDIA_ROOT = os.path.join(BASE_DIR, 'blog/media')
 MEDIA_URL = '/img/'
+
+# CKeditor base and upload paths
+CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
+CKEDITOR_UPLOAD_PATH = "uploads/"
+
+# Disqus API key
+DISQUS_API_KEY = '3Y48RQTf7KcqFqjCo91ZWvrUQgd7csv5ezCWVKVZe6qPzyjhELK2fnzFltPgyBUI'
+DISQUS_WEBSITE_SHORTNAME = 'http://www.bugtuna.com/'
