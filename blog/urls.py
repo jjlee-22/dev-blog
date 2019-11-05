@@ -10,4 +10,6 @@ urlpatterns = [
 	path('', views.PostList.as_view(), name='home'),
 	# /blog/<slug:slug>/
 	path('<slug:slug>', views.PostDetail.as_view(), name='post_detail'),
+	# /blog/category/
+	path('categories.html', views.CategoryList.as_view(), name='categories'),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

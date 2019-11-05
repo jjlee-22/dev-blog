@@ -18,5 +18,5 @@ class PostDetail(generic.DetailView):
 	template_name = 'blog/post_detail.html'
 
 class CategoryList(generic.ListView):
-	queryset = Post.objects.filter(status=1).order_by('-created_on')
+	queryset = Post.objects.filter(status=1).order_by('-tag')
 	template_name= 'blog/category.html'

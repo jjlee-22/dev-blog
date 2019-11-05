@@ -8,10 +8,16 @@
             <div class="intro">Can't find a blog specific to a project? Search here!</div>
         </div> <!-- //container-->
     </section>
-
     
+    <section class="blog-list px-3 py-5 p-md-5">
+        {% for category in categories %}
+        <div class="card">
+            <img class="card-img-top">
+            <div class="card-body">
+                <h3 class="card-title">{{ category.tag }}</h3>
+            </div>
+        </div> <!-- //card -->
+        {% endfor %}
+    </section>
 </div> <!-- //wrapper -->
-
-
-
 {% endblock %}

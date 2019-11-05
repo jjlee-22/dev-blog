@@ -22,6 +22,7 @@ class Post(models.Model):
 	created_on = models.DateTimeField('data published')
 	status = models.IntegerField(choices=STATUS, default=0)
 	post_image = models.ImageField(upload_to='img/', default='img/noimage/noimage.jpg', blank=True, null=True)
+	tag = models.CharField(max_length=200, default='misc')
 
 	class Meta:
 		ordering = ['-created_on']

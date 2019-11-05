@@ -137,3 +137,6 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 # Disqus API key
 DISQUS_API_KEY = '3Y48RQTf7KcqFqjCo91ZWvrUQgd7csv5ezCWVKVZe6qPzyjhELK2fnzFltPgyBUI'
 DISQUS_WEBSITE_SHORTNAME = 'http://www.bugtuna.com/'
+
+# Site ID
+SITE_ID = 1

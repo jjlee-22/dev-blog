@@ -17,12 +17,12 @@
 				{% for post in post_list %}
 			    <div class="item mb-5">
 				    <div class="media">
-                        <!-- For the images-->
-                        {% if post.post_image %}
-                        <img class="mr-3 img-fluid post-thumb d-none d-md-flex" src="{{ post.post_image.url }}">
-                        {% else %}
-                        <img class="mr-3 img-fluid post-thumb d-none d-md-flex" src="{% static 'assets/images/noimage.jpg' %}">
-                        {% endif %}
+              <!-- For the images-->
+              {% if post.post_image %}
+              <img class="mr-3 img-fluid post-thumb d-none d-md-flex" src="{{ post.post_image.url }}">
+              {% else %}
+              <img class="mr-3 img-fluid post-thumb d-none d-md-flex" src="{% static 'assets/images/noimage.jpg' %}">
+              {% endif %}
 					    <div class="media-body">
                             <h3 class="card-title">{{ post.title }}</h2>
 							<p class="card-text text-muted h6">{{ post.author }} | {{ post.created_on}} </p>
