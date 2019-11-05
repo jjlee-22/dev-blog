@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views import generic
 from django.core.paginator import Paginator
+from django.db.models import Count
 from .models import Post
 
 # Create your views here.
@@ -18,5 +19,6 @@ class PostDetail(generic.DetailView):
 	template_name = 'blog/post_detail.html'
 
 class CategoryList(generic.ListView):
-	queryset = Post.objects.filter(status=1).order_by('-tag')
+	context_object_name = 'category_list'
+	queryset = Post.objects.values('tag').annotate(dcount=Count('tag'))
 	template_name= 'blog/category.html'
