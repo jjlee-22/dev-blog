@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-from .models import Post
+from .models import Post, Category
 
 # Register your models here.
 class PostAdmin(admin.ModelAdmin):
@@ -12,3 +12,10 @@ class PostAdmin(admin.ModelAdmin):
 	prepopulated_fields = {'slug': ('title',)}
 
 admin.site.register(Post, PostAdmin)
+
+class CategoryAdmin(admin.ModelAdmin):
+	list_display = ('name', 'slug', 'parent', 'created_on')
+	search_fields = ['name']
+	prepopulated_fields = {'slug': ('name',)}
+
+admin.site.register(Category, CategoryAdmin)

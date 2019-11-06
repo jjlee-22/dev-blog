@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 
 {% block content %}
 <div class="main-wrapper">
@@ -10,14 +11,32 @@
     </section>
     
     <section class="blog-list px-3 py-5 p-md-5">
-        {% for category in category_list %}
-        <div class="card">
-            <img class="card-img-top">
-            <div class="card-body">
-                <h3 class="card-title">{{ category.tag }}</h3>
-            </div>
-        </div> <!-- //card -->
-        {% endfor %}
+        <div class="row">
+            {% for category in category_list %}
+            <div class="card col-md-4 mr-3 px-3 py-3">
+                {% if category.category_image.url %}
+                <a href="{% url 'blog:category_detail' category.slug %}"><img id="background-img" class="img-fluid post-thumb" src="{{ category.category_image.url }}"></a>
+                {% else %}
+                <img id="background-img" class="img-fluid post-thumb" src="{% static 'assets/images/noimage.jpg' %}">
+                {% endif %}
+                <div class="card-body">
+                    <h3 class="card-title">{{ category.name }}</h3>
+                    <p class="card-text">{{ category.desc }}</p>
+                </div>
+            </div> <!-- //card -->
+            {% endfor %}
+            
+        </div>
     </section>
+    
 </div> <!-- //wrapper -->
+<style>
+    #background-img {
+        opacity: 0.8;
+    }
+    #background-img:hover {
+        opacity: 0.4;
+        transition: 0.5s;
+    }
+</style>
 {% endblock %}

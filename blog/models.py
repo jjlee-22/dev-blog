@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
+from datetime import datetime
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
 
@@ -21,7 +22,8 @@ class Post(models.Model):
 	content = RichTextUploadingField()
 	created_on = models.DateTimeField('data published')
 	status = models.IntegerField(choices=STATUS, default=0)
-	post_image = models.ImageField(upload_to='img/', default='img/noimage/noimage.jpg', blank=True, null=True)
+	post_image = models.ImageField(upload_to='img/', default='noimage.jpg', blank=True, null=True)
+	category = models.ForeignKey('Category', null=True, blank=True, on_delete=models.CASCADE)
 	tag = models.CharField(max_length=200, default='misc')
 
 	class Meta:
@@ -30,3 +32,17 @@ class Post(models.Model):
 	def __str__(self):
 		return self.title
 	
+class Category(models.Model):
+	name = models.CharField(max_length=200, unique=True)
+	desc = models.TextField(default="")
+	category_image = models.ImageField(upload_to='c_img/', default='noimage.jpg', blank=True, null=True)
+	slug = models.SlugField(max_length=200, unique=True)
+	created_on = models.DateTimeField('data published', default=datetime.now)
+	parent = models.ForeignKey('self', blank=True, null=True, related_name='children', on_delete=models.CASCADE)
+
+	class Meta:
+		unique_together = ('slug', 'parent',)
+		verbose_name_plural = "categories"
+
+	def __str__(self):
+		return self.name
