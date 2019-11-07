@@ -1,4 +1,5 @@
-from django.urls import path
+from django.urls import path, re_path
+from django.conf.urls import url
 
 from . import views
 from django.conf import settings
@@ -13,5 +14,5 @@ urlpatterns = [
 	# /blog/category/
 	path('categories/', views.CategoryList.as_view(), name='categories'),
 	# blog/category/<slug:slug>/
-	path('categories/<slug:slug>', views.CategoryDetail.as_view(), name='category_detail')
+	url(r'^categories/(?P<category_slug>[-\w]+)/$', views.CategoryDetail, name='category_detail')
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

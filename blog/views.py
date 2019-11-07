@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.views import generic
 from django.core.paginator import Paginator
@@ -23,9 +23,12 @@ class CategoryList(generic.ListView):
 	queryset = Category.objects.order_by('-created_on')
 	template_name= 'blog/category.html'
 
-class CategoryDetail(generic.ListView):
-	context_object_name = 'category_detail'
-	queryset = Post.objects.filter(category__name__startswith='P').order_by('-created_on')
-	template_name = 'blog/category_detail.html'
-	paginate_by = 5
-	
+def CategoryDetail(request, category_slug):
+	categories = Category.objects.all()
+	post = Post.objects.filter(status=1)
+	if category_slug:
+		category = get_object_or_404(Category, slug=category_slug)
+		post = post.filter(category=category)
+	template = 'blog/category_detail.html'
+	context = {'categories': categories, 'post': post, 'category': category}
+	return render(request, template, context)
